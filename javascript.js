@@ -14,17 +14,13 @@ function prepareGrid(sideSquares) {
   while (gridcontainer.lastElementChild) {
     gridcontainer.removeChild(gridcontainer.lastElementChild);
   }
-  containerSide = 0;
-  for (let i = 800; i <= 960; i++) {
-    if (i % sideSquares === 0) {
-      containerSide = i;
-      break;
-    }
-  }
-  if (containerSide === 0) {
-    containerSide = 800;
-  }
-  squareSize = Math.floor(containerSide / sideSquares);
+
+  //this is toootah's magic
+  containerSide = 800;
+  squareSize = Math.ceil(containerSide/sideSquares);
+  containerSide = squareSize * sideSquares; 
+  ///
+  
   gridcontainer.style.width = containerSide + "px";
   for (let i = 1; i <= sideSquares; i++) {
     for (let i = 1; i <= sideSquares; i++) {
@@ -76,9 +72,9 @@ function prepareGrid(sideSquares) {
 
 let button = document.querySelector("#gridsize");
 button.addEventListener("click", () => {
-  let gridsize = prompt("please enter grid size");
+  let gridsize = Number(prompt("please enter grid size"));
   prepareGrid(gridsize);
 });
 
-let gridsize = prompt("please enter grid size");
+let gridsize = Number(prompt("please enter grid size"));
 prepareGrid(gridsize);
