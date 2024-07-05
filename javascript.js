@@ -1,5 +1,16 @@
+let draw = false;
+let clear = false;
+let gridcontainer = document.querySelector(".gridcontainer");
+gridcontainer.addEventListener("click", () => {
+  draw = !draw;
+  clear = false;
+});
+gridcontainer.addEventListener("contextmenu", () => {
+  draw = false;
+  clear = true;
+});
 function prepareGrid(sideSquares) {
-  let gridcontainer = document.querySelector(".gridcontainer");
+
   while (gridcontainer.lastElementChild) {
     gridcontainer.removeChild(gridcontainer.lastElementChild);
   }
@@ -25,20 +36,38 @@ function prepareGrid(sideSquares) {
       griddiv.style.height = squareSize + "px";
       griddiv.style.width = squareSize + "px";
       griddiv.addEventListener("mouseover", () => {
-        if (griddiv.style.opacity != "" && Number(griddiv.style.opacity) <= 1){
+        if (draw) {
+          if (
+            griddiv.style.opacity != "" &&
+            Number(griddiv.style.opacity) <= 1
+          ) {
             griddiv.style.opacity = `${Number(griddiv.style.opacity)+0.1}`;
-        }
-        if ( griddiv.style.backgroundColor == ''){
+          }
+          if (griddiv.style.backgroundColor == "") {
             function random_rgba() {
-                var o = Math.round, r = Math.random, s = 255;
-                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+              var o = Math.round,
+                r = Math.random,
+                s = 255;
+              return (
+                "rgba(" +
+                o(r() * s) +
+                "," +
+                o(r() * s) +
+                "," +
+                o(r() * s) +
+                "," +
+                r().toFixed(1) +
+                ")"
+              );
             }
-            
+
             var color = random_rgba();
             griddiv.style.backgroundColor = color;
             griddiv.style.opacity = "0.1";
+          }
+        }else if (clear){
+          griddiv.style.backgroundColor = "white";
         }
-
       });
       gridcontainer.appendChild(griddiv);
     }
