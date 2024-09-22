@@ -1,5 +1,6 @@
 let draw = false;
 let clear = false;
+let black = true;
 let gridcontainer = document.querySelector(".gridcontainer");
 gridcontainer.addEventListener("click", () => {
   draw = !draw;
@@ -56,10 +57,17 @@ function prepareGrid(sideSquares) {
                 ")"
               );
             }
-
-            var color = random_rgba();
+            let color = "";
+            let opacity = "";
+            if (black == false){
+              color = random_rgba();
+              opacity = "0.1";
+            }else{
+              color = "rgba(0,0,0,1)"
+              opacity = "1";
+            }
             griddiv.style.backgroundColor = color;
-            griddiv.style.opacity = "0.1";
+            griddiv.style.opacity = opacity;
           }
         }else if (clear){
           griddiv.style.backgroundColor = "white";
@@ -75,6 +83,18 @@ button.addEventListener("click", () => {
   let gridsize = Number(prompt("please enter grid size"));
   prepareGrid(gridsize);
 });
+
+button = document.querySelector("#color");
+button.addEventListener("click",()=>{
+  let colorbutton = document.querySelector("#color");
+  if (black == true){
+    black = false;
+    colorbutton.innerHTML = "All Colors";
+  }else{
+    black = true;
+    colorbutton.innerHTML = "Black Only";
+  }
+})
 
 let gridsize = Number(prompt("please enter grid size"));
 prepareGrid(gridsize);
