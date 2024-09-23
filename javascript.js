@@ -23,10 +23,10 @@ function prepareGrid(sideSquares) {
   ///
   
   gridcontainer.style.width = containerSide + "px";
-  for (let i = 1; i <= sideSquares; i++) {
+  for (let j = 1; j <= sideSquares; j++) {
     for (let i = 1; i <= sideSquares; i++) {
       let griddiv = document.createElement("div");
-      let divid = "grid" + i;
+      let divid = "grid" + i + j;
       let divclass = "flexgrid";
       griddiv.setAttribute("id", divid);
       griddiv.setAttribute("class", divclass);
@@ -38,7 +38,7 @@ function prepareGrid(sideSquares) {
             griddiv.style.opacity != "" &&
             Number(griddiv.style.opacity) <= 1
           ) {
-            griddiv.style.opacity = `${Number(griddiv.style.opacity)+0.1}`;
+            griddiv.style.opacity = `${Number(griddiv.style.opacity)+0.2}`;
           }
           if (griddiv.style.backgroundColor == "") {
             function random_rgba() {
